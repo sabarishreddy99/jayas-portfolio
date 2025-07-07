@@ -12,8 +12,153 @@ import {
   faPaperPlane,
   faCalendarAlt,
   faExternalLinkAlt,
-  faDownload
+  faDownload,
+  faChevronUp,
+  faFileText
 } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect } from 'react'
+
+// Floating Mobile Buttons Component
+function FloatingMobileButtons() {
+  const [showScrollTop, setShowScrollTop] = useState(false)
+  const [isAtTop, setIsAtTop] = useState(true)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      setShowScrollTop(scrollY > 300)
+      setIsAtTop(scrollY < 50) // Consider "at top" when within 50px of top
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  return (
+    <>
+      {/* Resume Button - Left Bottom */}
+      <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="fixed bottom-6 left-4 z-50 md:hidden"
+      >
+        <motion.a
+          href="https://drive.google.com/drive/folders/1vm35z-6VQjtO9A8ZBgCvvSP_7_POPTrV?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          animate={isAtTop ? {
+            scale: [1, 1.15, 1],
+            rotate: [0, -10, 10, -5, 5, 0],
+            transition: {
+              duration: 2,
+              repeat: Infinity,
+              repeatDelay: 3,
+              ease: "easeInOut"
+            }
+          } : {}}
+          className="flex items-center justify-center w-12 h-12 bg-kubernetes-600 hover:bg-kubernetes-700 text-white rounded-full shadow-lg transition-all duration-300 hover:shadow-xl relative"
+        >
+          <FontAwesomeIcon icon={faFileText} className="w-5 h-5" />
+          {isAtTop && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="absolute -top-3 -right-3 w-6 h-6 flex items-center justify-center"
+            >
+              {/* WiFi Signal Animation */}
+              <div className="relative">
+                {/* WiFi Arc 1 - Innermost */}
+                <motion.div
+                  className="absolute inset-0 border-2 border-yellow-600 rounded-full"
+                  style={{ width: '8px', height: '8px', top: '9px', left: '9px' }}
+                  animate={{
+                    opacity: [0, 1, 0],
+                    scale: [0.8, 1, 0.8]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: 0,
+                    ease: "easeOut"
+                  }}
+                />
+                {/* WiFi Arc 2 - Middle */}
+                <motion.div
+                  className="absolute border-2 border-yellow-600 rounded-full"
+                  style={{ width: '14px', height: '14px', top: '6px', left: '6px', borderTop: 'transparent', borderLeft: 'transparent', transform: 'rotate(225deg)' }}
+                  animate={{
+                    opacity: [0, 1, 0],
+                    scale: [0.8, 1, 0.8]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: 0.3,
+                    ease: "easeOut"
+                  }}
+                />
+                {/* WiFi Arc 3 - Outermost */}
+                <motion.div
+                  className="absolute border-2 border-yellow-600 rounded-full"
+                  style={{ width: '20px', height: '20px', top: '3px', left: '3px', borderTop: 'transparent', borderLeft: 'transparent', transform: 'rotate(225deg)' }}
+                  animate={{
+                    opacity: [0, 1, 0],
+                    scale: [0.8, 1, 0.8]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: 0.6,
+                    ease: "easeOut"
+                  }}
+                />
+                {/* Center Dot */}
+                <motion.div
+                  className="absolute w-2 h-2 bg-yellow-600 rounded-full"
+                  style={{ top: '10px', left: '10px' }}
+                  animate={{
+                    opacity: [1, 0.7, 1],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </div>
+            </motion.div>
+          )}
+        </motion.a>
+      </motion.div>
+
+      {/* Back to Top Button - Right Bottom */}
+      {showScrollTop && (
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 100 }}
+          className="fixed bottom-6 right-4 z-50 md:hidden"
+        >
+          <motion.button
+            onClick={scrollToTop}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="flex items-center justify-center w-12 h-12 bg-docker-600 hover:bg-docker-700 text-white rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
+          >
+            <FontAwesomeIcon icon={faChevronUp} className="w-5 h-5" />
+          </motion.button>
+        </motion.div>
+      )}
+    </>
+  )
+}
 
 export default function Contact() {
   const [ref, inView] = useInView({
@@ -101,13 +246,14 @@ export default function Contact() {
   }
 
   return (
-    <section ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="max-w-7xl mx-auto"
-      >
+    <>
+      <section ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="max-w-7xl mx-auto"
+        >
         {/* Section Header */}
         <motion.div variants={itemVariants} className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 bg-docker-100 dark:bg-docker-900/20 px-4 py-2 rounded-full mb-6">
@@ -315,6 +461,10 @@ export default function Contact() {
           </div>
         </motion.div>
       </motion.div>
+
+      {/* Floating Mobile Buttons */}
+      <FloatingMobileButtons />
     </section>
+    </>
   )
 }
