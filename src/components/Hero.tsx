@@ -99,23 +99,29 @@ export default function Hero() {
         <motion.div variants={itemVariants} className="mb-6">
           <div className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-2">
             <span className="font-mono text-primary-900 dark:text-kubernetes-400">
-              <FontAwesomeIcon icon={faDollarSign} className="mr-1 text-zinc-950  dark:text-gray-400" />
+              <FontAwesomeIcon icon={faTerminal} className="mr-1 text-zinc-950  dark:text-gray-400" />
+              <FontAwesomeIcon icon={faDollarSign} className="mr-1 text-zinc-950 dark:text-gray-400" />
               kubectl get engineer
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
-            <span className="gradient-text">Jaya Sabarish Reddy Remala</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 mt-4">
+            <span className="gradient-text">
+              Hi, I'm Jaya{" "}
+            
+                👋
+            
+            </span>
           </h1>
          
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
-           Software Development & DevOps Engineer
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-700 dark:text-gray-300 mb-6 tracking-wide leading-relaxed">
+           Simplifying complexity with Docker builds and Kubernetes brains.
           </h2>
         </motion.div>
 
         {/* Status Cards */}
         <motion.div 
           variants={itemVariants} 
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2 max-w-4xl mx-auto"
         >
           <motion.div
             whileHover={{ scale: 1.05, y: -5 }}
@@ -163,10 +169,34 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
+
+                {/* Terminal Command */}
+        <motion.div 
+          variants={itemVariants}
+          className="mt-12 max-w-2xl mx-auto"
+        >
+          <div className="terminal text-left">
+            <FontAwesomeIcon icon={faTerminal} className="mr-2 text-green-400" />
+            <div className="mb-2">
+              <span className="text-green-400">user@kubernetes-cluster:~$</span> kubectl describe engineer jaya
+            </div>
+            <div className="text-gray-300 text-sm">
+              <div>First Name: Jaya Sabarish Reddy</div>
+              <div>Last Name: Remala</div>
+              <div>Capabilities: SDE, Full-Stack, Cloud & DevOps</div>
+              <div>Experience: 3+ YOE</div>
+            <div>Status: Open to US opportunities</div>
+              <div>Ready: True</div>
+            </div>
+          </div>
+        </motion.div>
+
+
+
         {/* Contact Info */}
         <motion.div 
           variants={itemVariants}
-          className="flex flex-wrap justify-center gap-6 mb-8 text-gray-600 dark:text-gray-400"
+          className="flex flex-wrap justify-center gap-6 mb-8 text-gray-600 dark:text-gray-400 mt-4"
         >
           <div className="flex items-center space-x-2">
             <FontAwesomeIcon icon={faMapMarkerAlt} className="w-4 h-4 text-kubernetes-500" />
@@ -237,7 +267,7 @@ export default function Hero() {
         {/* Social Links */}
         <motion.div 
           variants={itemVariants}
-          className="flex justify-center space-x-6"
+          className="flex justify-center space-x-6 mb-2"
         >
           <motion.a
             href="https://github.com/sabarishreddy99"
@@ -262,25 +292,7 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        {/* Terminal Command */}
-        <motion.div 
-          variants={itemVariants}
-          className="mt-12 max-w-2xl mx-auto"
-        >
-          <div className="terminal text-left">
-            <FontAwesomeIcon icon={faTerminal} className="mr-2 text-green-400" />
-            <div className="mb-2">
-              <span className="text-green-400">user@kubernetes-cluster:~$</span> kubectl describe engineer jaya-sabarish-reddy-remala
-            </div>
-            <div className="text-gray-300 text-sm">
-              <div>Name: Jaya Sabarish Reddy Remala</div>
-              <div>Status: Available for deployment</div>
-              <div>Capabilities: SDE, Full-Stack, Cloud & DevOps</div>
-              <div>Experience: 3+ YOE</div>
-              <div>Ready: True</div>
-            </div>
-          </div>
-        </motion.div>
+
       </motion.div>
     </section>
   )

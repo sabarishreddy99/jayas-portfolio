@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL('https://sabarishreddyrj.gradevitian.in'),
   title: 'Jaya\'s Minikube Portfolio',
-  description: 'Software Engineer specializing in cloud infrastructure, DevOps, and full-stack development. Experience with Kubernetes, Docker, AWS, and modern web technologies.',
+  description: 'Passionate software engineer who transforms complex challenges into user-friendly solutions. From helping researchers collaborate globally to optimizing systems for 10K+ users - I build technology that makes a difference.',
   keywords: [
     'Software Engineer',
     'DevOps Engineer',

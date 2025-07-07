@@ -110,10 +110,7 @@ export default function About() {
             </h3>
             <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed">
               <p>
-                I'm the engineer who gets genuinely excited about solving problems that haven't been solved before. 
-                At NYU, I spend my days helping researchers connect across continents through code, while my nights 
-                were once spent ensuring Shell's oil tankers moved smoothly across 20+ countries. There's something 
-                deeply satisfying about building systems that just work even when nobody notices they're there.
+                I'm the kind of engineer who sees a broken system and thinks 'challenge accepted.' What excites me most? Building solutions that make people's lives easier, whether it's helping researchers connect across continents or ensuring oil tankers move smoothly across 20+ countries.
               </p>
               <p>
                 What drives me? The moment when complex becomes simple. I recently spent weeks diving into CRDT 

@@ -31,7 +31,7 @@ export default function Projects() {
   const projects = [
     {
       title: 'CodeCollab – Real-time Code Editor',
-      description: 'Built a real-time collaborative code editor using CRDT (Yjs), enabling concurrent editing in 3+ languages with sub-second sync latency.',
+      description: 'Ever tried coding with friends on a shared project? It\'s usually a mess of \'wait, don\'t edit that line!\' I solved this by building CodeCollab - now teams can code together seamlessly, like Google Docs but for developers.',
       type: 'kubernetes',
       category: 'Full Stack Application',
       technologies: ['Next.js', 'TypeScript', 'Yjs', 'AWS', 'Redis', 'Docker', 'NGINX'],
@@ -55,7 +55,7 @@ export default function Projects() {
     },
     {
       title: 'gradeVITian – Grade Forecasting Tool',
-      description: 'Developed an exam prediction tool serving 14K+ users; ranked #2 on Google, attracted 16K+ monthly organic visits, and actively maintained it in production for 6+ years.',
+      description: 'As a student, I was tired of guessing my grades. So I built gradeVITian - a tool that became so popular it\'s now used by 14K+ students. Six years later, it\'s still helping students plan their academic journey with confidence.',
       type: 'kubernetes',
       category: 'Web Application',
       technologies: ['React.js', 'PHP', 'PostgreSQL', 'Git', 'Google Search Console', 'SEO'],
