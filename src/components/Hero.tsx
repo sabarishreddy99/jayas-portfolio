@@ -67,7 +67,7 @@ export default function Hero() {
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-kubernetes-500 dark:ring-kubernetes-400 shadow-xl">
               {/* Placeholder for profile image */}
                 <Image 
-                    src="/sabari-avtar.jpg" 
+                    src="/sabari-avtar-portfolio.jpg" 
                     alt="Jaya Sabarish Reddy Remala" 
                     width={160} 
                     height={160} 
