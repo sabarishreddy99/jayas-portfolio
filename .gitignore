@@ -57,5 +57,5 @@ logs
 *.temp
 
 # Deployment packages (keep these for manual deployment)
-# hostinger-deployment-ready.zip
-# github-pages-deployment.zip
+hostinger-deployment-ready.zip
+github-pages-deployment.zip

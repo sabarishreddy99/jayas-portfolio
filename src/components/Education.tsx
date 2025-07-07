@@ -6,12 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDocker, faCodepen, faSalesforce, faAws } from '@fortawesome/free-brands-svg-icons'
 import { faGraduationCap, faDollarSign, faLuggageCart, faCalendarAlt, faMapMarkerAlt, faStar, faCode, faDatabase, faCogs, faMicrochip } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
-
-// Helper function to handle GitHub Pages basePath for images
-const getImagePath = (path: string) => {
-  const basePath = process.env.NODE_ENV === 'production' ? '/jayas-portfolio' : ''
-  return `${basePath}${path}`
-}
+import { getImagePath } from '@/utils/images'
 
 export default function Education() {
   const [ref, inView] = useInView({
