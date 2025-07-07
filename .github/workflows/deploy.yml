@@ -1,8 +1,19 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [ main ]
+  pus    - name: Setup Pages 📄
+      uses: actions/configure-pages@v4
+      with:
+        enablement: true
+      
+    - name: Upload artifact 📤
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./out
+        
+    - name: Deploy to GitHub Pages 🚀
+      id: deployment
+      uses: actions/deploy-pages@v4ches: [ main ]
 
 # Add permissions for GitHub Pages deployment
 permissions:
