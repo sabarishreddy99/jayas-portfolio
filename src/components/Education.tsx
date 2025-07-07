@@ -7,6 +7,12 @@ import { faDocker, faCodepen, faSalesforce, faAws } from '@fortawesome/free-bran
 import { faGraduationCap, faDollarSign, faLuggageCart, faCalendarAlt, faMapMarkerAlt, faStar, faCode, faDatabase, faCogs, faMicrochip } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 
+// Helper function to handle GitHub Pages basePath for images
+const getImagePath = (path: string) => {
+  const basePath = process.env.NODE_ENV === 'production' ? '/jayas-portfolio' : ''
+  return `${basePath}${path}`
+}
+
 export default function Education() {
   const [ref, inView] = useInView({
     threshold: 0.1,
@@ -144,7 +150,7 @@ export default function Education() {
                       }`}
                     >
                         <Image 
-                            src={edu.type === 'kubernetes' ? '/nyu-logo.jpg' : '/vit-logo.jpg'} 
+                            src={getImagePath(edu.type === 'kubernetes' ? '/nyu-logo.jpg' : '/vit-logo.jpg')} 
                             alt={`${edu.school} logo`} 
                             width={64} 
                             height={64} 
