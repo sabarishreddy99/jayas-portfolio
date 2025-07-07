@@ -6,6 +6,19 @@
 
 Welcome to my digital portfolio - a comprehensive showcase of my journey as a software engineer who specializes in transforming complex technical challenges into scalable, user-friendly solutions. This portfolio represents more than just code; it's a reflection of my commitment to building technology that makes a meaningful impact.
 
+### Design Inspiration
+
+The visual design and user experience of this portfolio are conceptually inspired by Docker and Kubernetes ecosystems, reflecting my deep expertise in containerization and orchestration technologies. This thematic approach creates a cohesive narrative that resonates with my professional focus on DevOps and cloud engineering.
+
+**Key Design Elements:**
+- **Container-Inspired Layouts**: Modular, self-contained components that mirror containerized architecture
+- **Orchestration Flow**: Smooth transitions and animations reflecting seamless system orchestration
+- **Terminal Aesthetics**: Command-line inspired elements that resonate with DevOps workflows
+- **Color Palette**: Professional blues and accent colors reminiscent of cloud-native technologies
+- **Strategic Terminology**: Thoughtful use of terms like "deployment", "manifest", and "kubectl" to reinforce technical expertise
+
+This design philosophy demonstrates my ability to think holistically about technology - from the infrastructure layer to the user experience - while maintaining a professional, recruiter-friendly presentation.
+
 ## Professional Summary
 
 I am a passionate software engineer with 3+ years of experience in full-stack development, cloud infrastructure, and DevOps engineering. Currently pursuing my Master's in Computer Science at New York University, I bring a unique combination of academic rigor and real-world industry experience to every project I undertake.
@@ -85,16 +98,6 @@ This portfolio supports deployment to multiple platforms:
 - **Animations**: Framer Motion for smooth interactions
 - **Icons**: Font Awesome for consistent iconography
 - **Deployment**: Static export for maximum compatibility
-
-### Design Philosophy
-The portfolio's visual design and user experience are conceptually inspired by Docker and Kubernetes ecosystems. This thematic choice reflects my deep expertise in containerization and orchestration technologies while creating a cohesive narrative throughout the user journey.
-
-**Design Elements:**
-- **Container-Inspired Layouts**: Modular, self-contained components that mirror containerized architecture
-- **Orchestration Flow**: Smooth transitions and animations that reflect the seamless orchestration of distributed systems
-- **Terminal Aesthetics**: Command-line inspired elements that resonate with DevOps and cloud engineering workflows
-- **Color Palette**: Blues and accent colors reminiscent of Docker and Kubernetes branding
-- **Terminology**: Strategic use of terms like "kubectl", "deployment", and "manifest" to reinforce technical expertise
 
 ---
 
