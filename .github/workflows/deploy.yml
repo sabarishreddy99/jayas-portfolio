@@ -1,19 +1,8 @@
 name: Deploy to GitHub Pages
 
 on:
-  pus    - name: Setup Pages 📄
-      uses: actions/configure-pages@v4
-      with:
-        enablement: true
-      
-    - name: Upload artifact 📤
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: ./out
-        
-    - name: Deploy to GitHub Pages 🚀
-      id: deployment
-      uses: actions/deploy-pages@v4ches: [ main ]
+  push:
+    branches: [ main ]
 
 # Add permissions for GitHub Pages deployment
 permissions:
@@ -48,8 +37,10 @@ jobs:
       env:
         NODE_ENV: production
         
-    - name: Setup Pages �
+    - name: Setup Pages 📄
       uses: actions/configure-pages@v4
+      with:
+        enablement: true
       
     - name: Upload artifact 📤
       uses: actions/upload-pages-artifact@v3
