@@ -210,9 +210,9 @@ export default function Contact() {
     {
       icon: faCalendarAlt,
       title: 'Availability',
-      value: 'Available May 2025',
+      value: 'June 2025',
       link: '#',
-      description: 'Open for full-time opportunities',
+      description: 'Open for US full-time opportunities',
       type: 'docker'
     }
   ]
@@ -378,21 +378,21 @@ export default function Contact() {
                 <FontAwesomeIcon icon={faDocker} className="w-6 h-6 mr-3 text-docker-500" />
                 Container Specifications
               </h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                  <div className="text-2xl font-bold text-gray-800 dark:text-gray-200">3+</div>
+              <div className="container-specs-grid grid grid-cols-2 gap-4">
+                <div className="container-spec text-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg relative overflow-hidden">
+                  <div className="container-number text-2xl font-bold text-gray-800 dark:text-gray-200">3+</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
                 </div>
-                <div className="text-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                  <div className="text-2xl font-bold text-gray-800 dark:text-gray-200">25K+</div>
+                <div className="container-spec text-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg relative overflow-hidden">
+                  <div className="container-number text-2xl font-bold text-gray-800 dark:text-gray-200">25K+</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Users Served</div>
                 </div>
-                <div className="text-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                  <div className="text-2xl font-bold text-gray-800 dark:text-gray-200">99.9%</div>
+                <div className="container-spec text-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg relative overflow-hidden">
+                  <div className="container-number text-2xl font-bold text-gray-800 dark:text-gray-200">99.9%</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Uptime Achieved</div>
                 </div>
-                <div className="text-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                  <div className="text-2xl font-bold text-gray-800 dark:text-gray-200">20+</div>
+                <div className="container-spec text-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg relative overflow-hidden">
+                  <div className="container-number text-2xl font-bold text-gray-800 dark:text-gray-200">20+</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Countries Deployed</div>
                 </div>
               </div>
@@ -411,7 +411,7 @@ export default function Contact() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-400">Target Date:</span>
-                  <span className="text-gray-800 dark:text-gray-200 font-medium">May 2025</span>
+                  <span className="text-gray-800 dark:text-gray-200 font-medium">June 2025</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-400">Preferred Roles:</span>
@@ -433,8 +433,7 @@ export default function Contact() {
               Ready to Scale Your Team?
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-8">
-              Let's discuss how my expertise in cloud infrastructure, DevOps practices, and full-stack development 
-              can help drive your organization's technological transformation.
+              Let’s explore how my expertise in software development, cloud, DevOps, and full-stack engineering can drive your tech transformation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a

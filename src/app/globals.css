@@ -301,6 +301,12 @@ body {
   border-bottom-color: rgba(240, 240, 240, 0.95);
 }
 
+.tooltip-container:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(4px);
+}
+
 /* Mobile tooltip adjustments */
 @media (max-width: 768px) {
   .tooltip {
@@ -473,4 +479,635 @@ body {
   display: inline-block;
   transform-origin: 70% 70%;
   animation: wave 3s ease-in-out infinite;
+}
+
+/* Mobile Carousel Utilities */
+.mobile-carousel-container {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.mobile-carousel-slide {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.mobile-carousel-content {
+  width: 100%;
+  min-width: 0; /* Allow text to wrap/truncate */
+  overflow: hidden;
+}
+
+/* Ensure proper text wrapping on mobile */
+@media (max-width: 640px) {
+  .mobile-carousel-slide {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  
+  .mobile-carousel-content h4 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .mobile-carousel-content p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.4;
+  }
+  
+  /* Force container constraints */
+  .carousel-section {
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  /* Ensure grid doesn't overflow */
+  .lg\:grid-cols-2 {
+    overflow: hidden;
+  }
+  
+  .lg\:grid-cols-2 > * {
+    min-width: 0;
+    overflow: hidden;
+  }
+}
+
+/* Prevent horizontal scroll on small screens */
+.carousel-section {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Technology Ecosystem Juggling Animation */
+@keyframes techJuggle {
+  0% { 
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+  25% { 
+    transform: scale(1.05) translateY(-2px);
+    opacity: 0.9;
+  }
+  50% { 
+    transform: scale(1.1) translateY(-4px);
+    opacity: 0.8;
+  }
+  75% { 
+    transform: scale(1.05) translateY(-2px);
+    opacity: 0.9;
+  }
+  100% { 
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes techPulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.2);
+  }
+  50% { 
+    transform: scale(1.02);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  }
+}
+
+@keyframes techFloat {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+  }
+  33% { 
+    transform: translateY(-1px) scale(1.03);
+  }
+  66% { 
+    transform: translateY(1px) scale(0.98);
+  }
+}
+
+/* Technology tag base styles */
+.tech-tag {
+  animation: techFloat 4s ease-in-out infinite;
+  transform-origin: center;
+  transition: all 0.3s ease;
+  will-change: transform;
+}
+
+/* Staggered animation delays for juggling effect */
+.tech-tag:nth-child(1) { animation-delay: 0s; }
+.tech-tag:nth-child(2) { animation-delay: 0.2s; }
+.tech-tag:nth-child(3) { animation-delay: 0.4s; }
+.tech-tag:nth-child(4) { animation-delay: 0.6s; }
+.tech-tag:nth-child(5) { animation-delay: 0.8s; }
+.tech-tag:nth-child(6) { animation-delay: 1s; }
+.tech-tag:nth-child(7) { animation-delay: 1.2s; }
+.tech-tag:nth-child(8) { animation-delay: 1.4s; }
+.tech-tag:nth-child(9) { animation-delay: 1.6s; }
+.tech-tag:nth-child(10) { animation-delay: 1.8s; }
+.tech-tag:nth-child(11) { animation-delay: 2s; }
+.tech-tag:nth-child(12) { animation-delay: 2.2s; }
+.tech-tag:nth-child(13) { animation-delay: 2.4s; }
+.tech-tag:nth-child(14) { animation-delay: 2.6s; }
+.tech-tag:nth-child(15) { animation-delay: 2.8s; }
+.tech-tag:nth-child(16) { animation-delay: 3s; }
+.tech-tag:nth-child(17) { animation-delay: 3.2s; }
+.tech-tag:nth-child(18) { animation-delay: 3.4s; }
+.tech-tag:nth-child(19) { animation-delay: 3.6s; }
+
+/* Hover effects for technology tags */
+.tech-tag:hover {
+  animation: techPulse 0.6s ease-in-out;
+  transform: scale(1.08) translateY(-3px) !important;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Enhanced formal look */
+.tech-ecosystem-container {
+  perspective: 1000px;
+}
+
+.tech-tag {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Pause animation on container hover for better UX */
+.tech-ecosystem-container:hover .tech-tag {
+  animation-play-state: paused;
+}
+
+/* Resume on individual tag hover */
+.tech-ecosystem-container:hover .tech-tag:hover {
+  animation-play-state: running;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tech-tag {
+    animation-duration: 5s;
+  }
+  
+  .tech-tag:hover {
+    transform: scale(1.05) translateY(-2px) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-tag {
+    animation: none;
+  }
+  
+  .tech-tag:hover {
+    transform: scale(1.05) !important;
+    transition: transform 0.2s ease;
+  }
+}
+
+/* Hero Title Animation */
+@keyframes heroTitlePulse {
+  0%, 100% { 
+    transform: scale(1);
+    text-shadow: 0 0 0 rgba(99, 102, 241, 0);
+  }
+  50% { 
+    transform: scale(1.02);
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+  }
+}
+
+@keyframes heroTitleFloat {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+  }
+  25% { 
+    transform: translateY(-2px) scale(1.005);
+  }
+  50% { 
+    transform: translateY(0px) scale(1.01);
+  }
+  75% { 
+    transform: translateY(2px) scale(1.005);
+  }
+}
+
+@keyframes heroTitleGlow {
+  0%, 100% { 
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% { 
+    transform: scale(1.008);
+    filter: brightness(1.05);
+  }
+}
+
+/* Hero title base animation */
+.hero-title {
+  animation: heroTitleFloat 6s ease-in-out infinite;
+  transform-origin: center;
+  transition: all 0.3s ease;
+  will-change: transform;
+}
+
+/* Enhanced hover effect for hero title */
+.hero-title:hover {
+  animation: heroTitlePulse 1.5s ease-in-out infinite;
+  transform: scale(1.03) !important;
+  text-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+}
+
+/* Professional glow effect */
+.hero-title-glow {
+  animation: heroTitleGlow 8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Responsive hero title adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    animation-duration: 7s;
+  }
+  
+  .hero-title:hover {
+    transform: scale(1.02) !important;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    animation-duration: 8s;
+  }
+  
+  .hero-title:hover {
+    transform: scale(1.015) !important;
+  }
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero-title,
+  .hero-title-glow {
+    animation: none;
+  }
+  
+  .hero-title:hover {
+    transform: scale(1.02) !important;
+    transition: transform 0.3s ease;
+    text-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
+  }
+}
+
+/* Enhanced gradient text with animation support */
+.gradient-text-animated {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Dark mode adjustments for hero title */
+.dark .hero-title:hover {
+  text-shadow: 0 0 30px rgba(147, 197, 253, 0.2);
+}
+
+@media (max-width: 768px) {
+  .dark .hero-title:hover {
+    text-shadow: 0 0 20px rgba(147, 197, 253, 0.15);
+  }
+}
+
+/* Hand emoji animation fixes */
+.hand-wave {
+  display: inline-block !important;
+  transform-origin: 70% 70% !important;
+  will-change: transform !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+/* Ensure emoji animations work on all browsers */
+span[role="img"],
+.emoji {
+  display: inline-block;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Force hardware acceleration for smooth emoji animation */
+.hero-title span motion.span,
+.hero-title motion.span {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Professional Social Links Glow Animation */
+@keyframes socialGlow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(99, 102, 241, 0.3), 0 0 10px rgba(99, 102, 241, 0.2), 0 0 15px rgba(99, 102, 241, 0.1);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5), 0 0 20px rgba(99, 102, 241, 0.3), 0 0 30px rgba(99, 102, 241, 0.2);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes socialPulse {
+  0%, 100% { 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    filter: brightness(1);
+  }
+  50% { 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 20px rgba(99, 102, 241, 0.2);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes githubGlow {
+  0%, 100% { 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 10px rgba(75, 85, 99, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 20px rgba(75, 85, 99, 0.5);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes linkedinGlow {
+  0%, 100% { 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 10px rgba(37, 99, 235, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 20px rgba(37, 99, 235, 0.5);
+    transform: scale(1.02);
+  }
+}
+
+/* Social link base styles */
+.social-link {
+  animation: socialPulse 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Individual platform glow effects */
+.social-link-github {
+  animation: githubGlow 5s ease-in-out infinite;
+}
+
+.social-link-linkedin {
+  animation: linkedinGlow 5.5s ease-in-out infinite;
+}
+
+/* Enhanced hover effects */
+.social-link:hover {
+  animation-play-state: paused;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 30px rgba(99, 102, 241, 0.4) !important;
+  transform: scale(1.15) translateY(-2px) !important;
+}
+
+.social-link-github:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 30px rgba(75, 85, 99, 0.6) !important;
+}
+
+.social-link-linkedin:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 30px rgba(37, 99, 235, 0.6) !important;
+}
+
+/* Shimmer effect for extra professionalism */
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.social-link:hover::before {
+  left: 100%;
+}
+
+/* Staggered animation delays */
+.social-link:nth-child(1) { animation-delay: 0s; }
+.social-link:nth-child(2) { animation-delay: 0.5s; }
+.social-link:nth-child(3) { animation-delay: 1s; }
+
+/* Dark mode adjustments */
+.dark .social-link {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dark .social-link:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(147, 197, 253, 0.4) !important;
+}
+
+.dark .social-link-github:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(156, 163, 175, 0.6) !important;
+}
+
+.dark .social-link-linkedin:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(59, 130, 246, 0.6) !important;
+}
+
+/* Container Specifications Juggling Animation */
+@keyframes containerFloat {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+  }
+  25% { 
+    transform: translateY(-3px) scale(1.02);
+  }
+  50% { 
+    transform: translateY(0px) scale(1.04);
+  }
+  75% { 
+    transform: translateY(2px) scale(1.02);
+  }
+}
+
+@keyframes containerJuggle {
+  0%, 100% { 
+    transform: translateY(0px) scale(1) rotate(0deg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  20% { 
+    transform: translateY(-4px) scale(1.03) rotate(1deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  40% { 
+    transform: translateY(2px) scale(0.98) rotate(-1deg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  60% { 
+    transform: translateY(-2px) scale(1.05) rotate(0.5deg);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+  80% { 
+    transform: translateY(1px) scale(1.01) rotate(-0.5deg);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes containerPulse {
+  0%, 100% { 
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% { 
+    transform: scale(1.02);
+    filter: brightness(1.05);
+  }
+}
+
+@keyframes numberCountUp {
+  0% { 
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% { 
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Container specification base styles */
+.container-spec {
+  animation: containerFloat 5s ease-in-out infinite;
+  transform-origin: center;
+  transition: all 0.3s ease;
+  will-change: transform;
+}
+
+/* Individual container juggling with staggered delays */
+.container-spec:nth-child(1) { 
+  animation: containerJuggle 4s ease-in-out infinite;
+  animation-delay: 0s; 
+}
+.container-spec:nth-child(2) { 
+  animation: containerJuggle 4.5s ease-in-out infinite;
+  animation-delay: 0.5s; 
+}
+.container-spec:nth-child(3) { 
+  animation: containerJuggle 5s ease-in-out infinite;
+  animation-delay: 1s; 
+}
+.container-spec:nth-child(4) { 
+  animation: containerJuggle 4.2s ease-in-out infinite;
+  animation-delay: 1.5s; 
+}
+
+/* Number animation */
+.container-number {
+  animation: numberCountUp 1s ease-out;
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
+}
+
+/* Enhanced hover effects */
+.container-spec:hover {
+  animation-play-state: paused;
+  transform: scale(1.08) translateY(-5px) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(66, 153, 225, 0.3) !important;
+  z-index: 10;
+}
+
+/* Docker-themed glow for specs */
+.container-spec:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(96, 165, 250, 0.4) !important;
+}
+
+/* Shimmer effect */
+.container-spec::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.6s ease;
+  border-radius: 0.5rem;
+}
+
+.container-spec:hover::before {
+  left: 100%;
+}
+
+/* Container grid enhancements */
+.container-specs-grid {
+  perspective: 1000px;
+}
+
+/* Pause all animations on container hover for better UX */
+.container-specs-grid:hover .container-spec {
+  animation-play-state: paused;
+}
+
+/* Resume animation on individual hover */
+.container-specs-grid:hover .container-spec:hover {
+  animation-play-state: running;
+}
+
+/* Dark mode adjustments */
+.dark .container-spec:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(147, 197, 253, 0.4) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container-spec {
+    animation-duration: 6s;
+  }
+  
+  .container-spec:hover {
+    transform: scale(1.05) translateY(-3px) !important;
+  }
+}
+
+/* Accessibility: Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .container-spec,
+  .container-number {
+    animation: none;
+  }
+  
+  .container-spec:hover {
+    transform: scale(1.03) !important;
+    transition: all 0.3s ease;
+  }
 }

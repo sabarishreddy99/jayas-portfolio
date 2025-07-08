@@ -104,12 +104,11 @@ export default function Hero() {
               kubectl get engineer
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 mt-4">
-            <span className="gradient-text">
+          <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-4 mt-4">
+            <span className="gradient-text gradient-text-animated">
               Hi, I'm Jaya{" "}
-            
                 👋
-            
+    
             </span>
           </h1>
          
@@ -275,7 +274,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.2, rotate: 5 }}
             whileTap={{ scale: 0.9 }}
-            className="w-12 h-12 bg-gray-800 dark:bg-gray-700 text-white rounded-lg flex items-center justify-center hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
+            className="social-link social-link-github w-12 h-12 bg-gray-800 dark:bg-gray-700 text-white rounded-lg flex items-center justify-center hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
           >
             <FontAwesomeIcon icon={faGithub} className="w-6 h-6" />
           </motion.a>
@@ -286,7 +285,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.2, rotate: -5 }}
             whileTap={{ scale: 0.9 }}
-            className="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors"
+            className="social-link social-link-linkedin w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors"
           >
             <FontAwesomeIcon icon={faLinkedin} className="w-6 h-6" />
           </motion.a>

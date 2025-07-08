@@ -101,7 +101,7 @@ export default function Experience() {
             Runtime Environments
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            My experience manifests guarantee uptime, deliver impact, and scale beautifully under pressure.
+            Scaling Impact. Shipping Reliability.
           </p>
         </motion.div>
 

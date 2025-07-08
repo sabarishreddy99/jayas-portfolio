@@ -4,13 +4,44 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDocker, faCodepen, faAws } from '@fortawesome/free-brands-svg-icons'
-import { faServer, faCode, faCloud, faCogs, faRocket, faShieldAlt } from '@fortawesome/free-solid-svg-icons'
+import { faServer, faCode, faCloud, faCogs, faRocket, faShieldAlt, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect, useRef } from 'react'
 
 export default function About() {
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   })
+
+  // Mobile carousel state
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const carouselRef = useRef<HTMLDivElement>(null)
+
+  // Auto-scroll effect for mobile carousel
+  useEffect(() => {
+    if (!isAutoPlaying) return
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % highlights.length)
+    }, 3000) // Change slide every 3 seconds
+
+    return () => clearInterval(interval)
+  }, [isAutoPlaying])
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index)
+    setIsAutoPlaying(false) // Stop auto-play when user interacts
+    setTimeout(() => setIsAutoPlaying(true), 10000) // Resume auto-play after 10 seconds
+  }
+
+  const nextSlide = () => {
+    goToSlide((currentSlide + 1) % highlights.length)
+  }
+
+  const prevSlide = () => {
+    goToSlide(currentSlide === 0 ? highlights.length - 1 : currentSlide - 1)
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -140,28 +171,110 @@ export default function About() {
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="space-y-6">
-            {highlights.map((highlight, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.02, x: 10 }}
-                className="flex items-start space-x-4 p-6 rounded-lg glass-effect card-hover"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-gradient-to-r from-kubernetes-500 to-docker-500 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={highlight.icon} className="w-6 h-6 text-white" />
+          <motion.div variants={itemVariants}>
+            {/* Desktop Version - Hidden on Mobile */}
+            <div className="hidden md:block space-y-6">
+              {highlights.map((highlight, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.02, x: 10 }}
+                  className="flex items-start space-x-4 p-6 rounded-lg glass-effect card-hover"
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-gradient-to-r from-kubernetes-500 to-docker-500 rounded-lg flex items-center justify-center">
+                      <FontAwesomeIcon icon={highlight.icon} className="w-6 h-6 text-white" />
+                    </div>
                   </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                      {highlight.title}
+                    </h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {highlight.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Mobile Carousel Version - Hidden on Desktop */}
+            <div className="md:hidden w-full overflow-hidden">
+              <div 
+                ref={carouselRef}
+                className="relative w-full max-w-full overflow-hidden rounded-lg"
+                onMouseEnter={() => setIsAutoPlaying(false)}
+                onMouseLeave={() => setIsAutoPlaying(true)}
+                onTouchStart={() => setIsAutoPlaying(false)}
+              >
+                <div className="w-full overflow-hidden">
+                  <motion.div 
+                    className="flex transition-transform duration-500 ease-in-out"
+                    style={{ 
+                      transform: `translateX(-${currentSlide * 100}%)`,
+                    }}
+                  >
+                    {highlights.map((highlight, index) => (
+                      <div 
+                        key={index} 
+                        className="w-full flex-shrink-0"
+                      >
+                        <div className="px-3 w-full">
+                          <motion.div
+                            className="flex items-start space-x-3 p-4 rounded-lg glass-effect card-hover w-full"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                          >
+                            <div className="flex-shrink-0">
+                              <div className="w-10 h-10 bg-gradient-to-r from-kubernetes-500 to-docker-500 rounded-lg flex items-center justify-center">
+                                <FontAwesomeIcon icon={highlight.icon} className="w-5 h-5 text-white" />
+                              </div>
+                            </div>
+                            <div className="flex-1 min-w-0 pr-2">
+                              <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2 text-sm leading-tight break-words">
+                                {highlight.title}
+                              </h4>
+                              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed break-words">
+                                {highlight.description}
+                              </p>
+                            </div>
+                          </motion.div>
+                        </div>
+                      </div>
+                    ))}
+                  </motion.div>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
-                    {highlight.title}
-                  </h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {highlight.description}
-                  </p>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-1 top-1/2 transform -translate-y-1/2 w-7 h-7 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center z-10 opacity-80 hover:opacity-100 transition-opacity touch-manipulation"
+                >
+                  <FontAwesomeIcon icon={faChevronLeft} className="w-3 h-3 text-gray-600 dark:text-gray-300" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-1 top-1/2 transform -translate-y-1/2 w-7 h-7 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center z-10 opacity-80 hover:opacity-100 transition-opacity touch-manipulation"
+                >
+                  <FontAwesomeIcon icon={faChevronRight} className="w-3 h-3 text-gray-600 dark:text-gray-300" />
+                </button>
+
+                {/* Dot Indicators */}
+                <div className="flex justify-center space-x-2 mt-4 px-4">
+                  {highlights.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToSlide(index)}
+                      className={`w-2 h-2 rounded-full transition-colors touch-manipulation ${
+                        currentSlide === index 
+                          ? 'bg-kubernetes-500' 
+                          : 'bg-gray-300 dark:bg-gray-600'
+                      }`}
+                    />
+                  ))}
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </div>
           </motion.div>
         </div>
 
@@ -170,7 +283,7 @@ export default function About() {
           <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-8">
             Technology Ecosystem
           </h3>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="tech-ecosystem-container flex flex-wrap justify-center gap-3">
             {[
               'Kubernetes', 'Docker', 'AWS', 'React', 'Node.js', 'TypeScript', 'Python', 
               'PostgreSQL', 'Redis', 'Jenkins', 'Terraform', 'GitHub Actions', 'Salesforce',
@@ -178,8 +291,7 @@ export default function About() {
             ].map((tech, index) => (
               <motion.span
                 key={index}
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:bg-kubernetes-100 hover:text-kubernetes-700 dark:hover:bg-kubernetes-900/20 dark:hover:text-kubernetes-400 transition-colors cursor-default"
+                className="tech-tag px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:bg-kubernetes-100 hover:text-kubernetes-700 dark:hover:bg-kubernetes-900/20 dark:hover:text-kubernetes-400 transition-colors cursor-default"
               >
                 {tech}
               </motion.span>

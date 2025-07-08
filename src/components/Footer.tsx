@@ -138,13 +138,15 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-2 text-gray-400 text-sm mb-4 md:mb-0">
+          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-2 text-gray-400 text-sm text-center md:text-left">
               <span>© {currentYear} Jaya Sabarish Reddy Remala</span>
+              <span className="hidden md:inline">|</span>
+              <span>Designed with a Docker and Kubernetes mindset.</span>
             </div>
 
-            <div className="flex items-center space-x-6">
-              <span className="text-gray-400 text-sm">
+            <div className="flex items-center space-x-4">
+              <span className="text-gray-400 text-sm hidden sm:flex items-center">
                 Back to <FontAwesomeIcon icon={faHome} className="w-3 h-3 text-docker-400 mx-1" />
               </span>
               
