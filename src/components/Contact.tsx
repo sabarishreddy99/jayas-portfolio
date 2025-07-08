@@ -160,6 +160,114 @@ function FloatingMobileButtons() {
   )
 }
 
+// Professional Floating Contact Icons for Desktop/Tablet
+function FloatingContactIcons() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      setIsVisible(scrollY > 200) // Show after scrolling 200px
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const contactIcons = [
+    {
+      icon: faEnvelope,
+      href: 'mailto:jr6421@nyu.edu',
+      label: 'Send Email',
+      color: 'bg-kubernetes-600 hover:bg-kubernetes-700',
+      delay: 0
+    },
+    {
+      icon: faLinkedin,
+      href: 'https://linkedin.com/in/jayasabarishreddyr',
+      label: 'LinkedIn Profile',
+      color: 'bg-blue-600 hover:bg-blue-700',
+      delay: 0.1,
+      external: true
+    }
+  ]
+
+  return (
+    <div className="hidden md:block">
+      <motion.div
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ 
+          opacity: isVisible ? 1 : 0,
+          x: isVisible ? 0 : 100
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 space-y-4"
+      >
+        {contactIcons.map((contact, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ 
+              opacity: isVisible ? 1 : 0,
+              x: isVisible ? 0 : 50
+            }}
+            transition={{ 
+              duration: 0.4, 
+              delay: contact.delay,
+              ease: "easeOut"
+            }}
+            className="group relative"
+          >
+            <motion.a
+              href={contact.href}
+              target={contact.external ? "_blank" : undefined}
+              rel={contact.external ? "noopener noreferrer" : undefined}
+              whileHover={{ 
+                scale: 1.1,
+                x: -8,
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.95 }}
+              className={`
+                flex items-center justify-center w-14 h-14 rounded-full text-white
+                shadow-lg hover:shadow-xl transition-all duration-300
+                ${contact.color}
+                backdrop-blur-sm border border-white/20
+              `}
+            >
+              <FontAwesomeIcon icon={contact.icon} className="w-6 h-6" />
+            </motion.a>
+            
+            {/* Tooltip */}
+            <motion.div
+              initial={{ opacity: 0, x: 10, scale: 0.8 }}
+              whileHover={{ opacity: 1, x: 0, scale: 1 }}
+              className="absolute right-16 top-1/2 transform -translate-y-1/2 px-3 py-2 bg-gray-900 dark:bg-gray-800 text-white text-sm rounded-lg shadow-lg whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-200"
+            >
+              {contact.label}
+              <div className="absolute left-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-4 border-l-gray-900 dark:border-l-gray-800 border-y-4 border-y-transparent"></div>
+            </motion.div>
+          </motion.div>
+        ))}
+        
+        {/* Subtle background glow */}
+        <motion.div
+          animate={{
+            opacity: [0.3, 0.6, 0.3],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute inset-0 bg-gradient-to-l from-kubernetes-500/10 to-blue-500/10 rounded-full filter blur-xl -z-10"
+        />
+      </motion.div>
+    </div>
+  )
+}
+
 export default function Contact() {
   const [ref, inView] = useInView({
     threshold: 0.1,
@@ -265,9 +373,8 @@ export default function Contact() {
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
             Network Policies
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Ready to deploy innovative solutions together? Let's establish a secure connection 
-            and discuss how I can contribute to your team's success.
+          <p className="text-lg font-light text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            Let’s connect and deploy something great!
           </p>
         </motion.div>
 
@@ -432,29 +539,35 @@ export default function Contact() {
             <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
               Ready to Scale Your Team?
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-gray-600 dark:text-gray-400 mb-8 font-light">
               Let’s explore how my expertise in software development, cloud, DevOps, and full-stack engineering can drive your tech transformation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <motion.a
                 href="mailto:jr6421@nyu.edu"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center space-x-2 bg-kubernetes-600 hover:bg-kubernetes-700 text-white px-8 py-4 rounded-lg font-medium transition-colors"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="group inline-flex items-center justify-center space-x-3 bg-white dark:bg-gray-800 border-2 border-kubernetes-600 text-kubernetes-600 hover:bg-kubernetes-600 hover:text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 shadow-sm hover:shadow-lg min-w-[200px]"
               >
-                <FontAwesomeIcon icon={faEnvelope} className="w-5 h-5" />
-                <span>Initiate Connection</span>
+                <FontAwesomeIcon icon={faEnvelope} className="w-5 h-5 transition-transform group-hover:scale-110" />
+                <span>Send Message</span>
+                <motion.div
+                  className="w-2 h-2 bg-current rounded-full opacity-0 group-hover:opacity-100"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                />
               </motion.a>
               <motion.a
                 href="https://linkedin.com/in/jayasabarishreddyr"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center space-x-2 border-2 border-docker-600 text-docker-600 hover:bg-docker-600 hover:text-white px-8 py-4 rounded-lg font-medium transition-colors"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="group inline-flex items-center justify-center space-x-3 bg-white dark:bg-gray-800 border-2 border-docker-600 text-docker-600 hover:bg-docker-600 hover:text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 shadow-sm hover:shadow-lg min-w-[200px]"
               >
-                <FontAwesomeIcon icon={faLinkedin} className="w-5 h-5" />
-                <span>Connect on LinkedIn</span>
+                <FontAwesomeIcon icon={faLinkedin} className="w-5 h-5 transition-transform group-hover:scale-110" />
+                <span>View Profile</span>
+                <FontAwesomeIcon icon={faExternalLinkAlt} className="w-3 h-3 opacity-60 group-hover:opacity-100 transition-opacity" />
               </motion.a>
             </div>
           </div>
@@ -463,6 +576,9 @@ export default function Contact() {
 
       {/* Floating Mobile Buttons */}
       <FloatingMobileButtons />
+
+      {/* Floating Contact Icons for Desktop/Tablet */}
+      <FloatingContactIcons />
     </section>
     </>
   )

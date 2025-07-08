@@ -207,7 +207,7 @@ export default function Skills() {
             <FontAwesomeIcon icon={faTools} className="inline-block mr-2 text-kubernetes-300" />
             Service Mesh
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg font-light text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Code, container, deploy, repeat - powered by caffeine.
           </p>
         </motion.div>

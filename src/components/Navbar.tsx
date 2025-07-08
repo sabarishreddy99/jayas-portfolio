@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSun, faMoon, faBars, faTimes, faBarcode, faHotdog, faSuitcase, faGraduationCap, faToolbox, faTools, faMicrophone } from '@fortawesome/free-solid-svg-icons'
-import { faDocker, faCodepen, faStackOverflow } from '@fortawesome/free-brands-svg-icons'
+import { faSun, faMoon, faBars, faTimes, faBarcode, faHotdog, faSuitcase, faGraduationCap, faToolbox, faTools, faMicrophone, faCoffee, faCodeFork, faCode, faCodeMerge, faCodeBranch } from '@fortawesome/free-solid-svg-icons'
+import { faDocker, faCodepen, faStackOverflow, faCodiepie } from '@fortawesome/free-brands-svg-icons'
 
 interface NavbarProps {
   activeSection: string
@@ -94,12 +94,12 @@ export default function Navbar({ activeSection }: NavbarProps) {
           >
             <div className="relative">
               <FontAwesomeIcon 
-                icon={faCodepen} 
-                className="w-8 h-8 text-kubernetes-600 dark:text-kubernetes-400 icon-rotate" 
+                icon={faCoffee} 
+                className="w-8 h-8 text-kubernetes-600 dark:text-kubernetes-400" 
               />
               <FontAwesomeIcon 
-                icon={faDocker} 
-                className="w-6 h-6 text-docker-600 dark:text-docker-400 absolute -bottom-1 -right-1" 
+                icon={faCodeBranch} 
+                className="w-6 h-6 text-docker-600 dark:text-docker-400 absolute -bottom-1 -right-1 icon-rotate" 
               />
             </div>
             <span className="flex items-baseline">

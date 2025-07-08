@@ -117,10 +117,9 @@ export default function Education() {
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
             Deployment History
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            My knowledge base compiled from two release cycles: VIT's electrical engineering bootcamp 
-            and NYU's advanced algorithms laboratory
-          </p>
+            <p className="text-lg font-light text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            My Knowledge Base is compiled from two release cycles.
+            </p>
         </motion.div>
 
         {/* Education Cards */}

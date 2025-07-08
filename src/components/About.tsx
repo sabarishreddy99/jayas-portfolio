@@ -108,7 +108,7 @@ export default function About() {
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
             Cluster Manifest
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
             Orchestrating digital symphonies where containers dance in perfect harmony.
           </p>
         </motion.div>
