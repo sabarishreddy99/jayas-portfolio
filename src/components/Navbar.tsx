@@ -104,7 +104,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
             </div>
             <span className="flex items-baseline">
               {/* <span className="its-text">its</span> */}
-              <span className="jaya-logo">JR</span>
+              <span className="jaya-logo">Jaya</span>
             </span>
           </motion.div>
 

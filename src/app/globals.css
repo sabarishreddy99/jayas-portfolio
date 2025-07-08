@@ -363,23 +363,62 @@ body {
 
 /* Logo styles */
 .jaya-logo {
-  font-family: 'Dancing Script', cursive;
-  font-weight: 700;
-  font-size: 1.75rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: var(--font-allura), var(--font-great-vibes), 'Alex Brush', var(--font-dancing-script), cursive;
+  font-weight: 500;
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
-  letter-spacing: 0.05em;
+  letter-spacing: -0.1em;
+  position: relative;
+  display: inline-block;
+  animation: logoGradientShift 6s ease-in-out infinite, logoFloat 10s ease-in-out infinite;
+  transform-origin: center;
+  filter: drop-shadow(0 4px 8px rgba(79, 70, 229, 0.2));
+  font-style: normal;
+  transition: all 0.3s ease;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "liga" 1, "kern" 1, "calt" 1;
+  font-feature-settings: "liga" 1, "kern" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.jaya-logo::before {
+  content: 'JR';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: blur(8px);
+  z-index: -1;
+  animation: logoGlow 4s ease-in-out infinite alternate;
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: italic;
 }
 
 .dark .jaya-logo {
-  background: linear-gradient(135deg, #a78bfa 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 2px 4px rgba(167, 139, 250, 0.3);
+  filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.3));
+}
+
+.dark .jaya-logo::before {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .its-text {
@@ -402,11 +441,25 @@ body {
   }
   
   .jaya-logo {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: -0.08em;
   }
   
   .its-text {
     font-size: 0.8rem;
+  }
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .jaya-logo {
+    animation: none !important;
+  }
+  
+  .jaya-logo::before,
+  .jaya-logo::after {
+    animation: none !important;
   }
 }
 
@@ -1294,4 +1347,46 @@ span[role="img"],
     transform: scale(1.03) !important;
     transition: all 0.3s ease;
   }
+}
+
+/* Logo Animation Keyframes */
+@keyframes logoGradientShift {
+  0%, 100% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% { 
+    transform: translateY(0px) scale(1) rotate(-1deg);
+  }
+  50% { 
+    transform: translateY(-2px) scale(1.02) rotate(1deg);
+  }
+}
+
+@keyframes logoGlow {
+  0% { 
+    opacity: 0.2;
+    transform: scale(0.98);
+  }
+  100% { 
+    opacity: 0.4;
+    transform: scale(1.02);
+  }
+}
+
+/* Enhanced hover effects for logo */
+.jaya-logo:hover {
+  animation-play-state: paused;
+  transform: scale(1.1) translateY(-2px) rotate(2deg) !important;
+  filter: drop-shadow(0 8px 16px rgba(79, 70, 229, 0.4)) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .jaya-logo:hover {
+  filter: drop-shadow(0 8px 16px rgba(99, 102, 241, 0.5)) !important;
 }
