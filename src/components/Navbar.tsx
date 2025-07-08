@@ -23,45 +23,38 @@ export default function Navbar({ activeSection }: NavbarProps) {
   const navigationItems = [
     { 
       id: 'orchestration-hub', 
-      label: 'Orchestration Hub', 
-      icon: faCodepen,
-      tooltip: 'Home'
+      label: 'Home', 
+      icon: faCodepen
     },
     { 
       id: 'cluster-manifest', 
-      label: 'Cluster Manifest', 
-      icon: faHotdog,
-      tooltip: 'About'
+      label: 'About', 
+      icon: faHotdog
     },
     { 
       id: 'runtime-environments', 
-      label: 'Runtime Environments', 
-      icon: faSuitcase,
-      tooltip: 'Experience'
+      label: 'Experience', 
+      icon: faSuitcase
     },
     { 
       id: 'deployment-history', 
-      label: 'Deployment History', 
-      icon: faGraduationCap,
-      tooltip: 'Education'
+      label: 'Education', 
+      icon: faGraduationCap
     },
     { 
       id: 'container-registry', 
-      label: 'Container Registry', 
-      icon: faStackOverflow,
-      tooltip: 'Projects'
+      label: 'Projects', 
+      icon: faStackOverflow
     },
     { 
       id: 'service-mesh', 
-      label: 'Service Mesh', 
-      icon: faTools,
-      tooltip: 'Skills'
+      label: 'Skills', 
+      icon: faTools
     },
     { 
       id: 'network-policies', 
-      label: 'Network Policies', 
-      icon: faMicrophone,
-      tooltip: 'Contact'
+      label: 'Contact', 
+      icon: faMicrophone
     },
   ]
 
@@ -108,74 +101,23 @@ export default function Navbar({ activeSection }: NavbarProps) {
             </span>
           </motion.div>
 
-          {/* Desktop Navigation - Only show on larger screens */}
-          <div className="hidden xl:flex items-center space-x-6">
+          {/* Desktop and Tablet Navigation - Consistent across all screen sizes */}
+          <div className="hidden md:flex items-center space-x-6">
             {navigationItems.map((item) => (
-              <div key={item.id} className="tooltip-container">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    activeSection === item.id
-                      ? 'text-kubernetes-600 dark:text-kubernetes-400 bg-kubernetes-50 dark:bg-kubernetes-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-kubernetes-600 dark:hover:text-kubernetes-400'
-                  }`}
-                >
-                  <FontAwesomeIcon icon={item.icon} className="w-4 h-4" />
-                  <span>{item.label}</span>
-                </motion.button>
-                <div className="tooltip">
-                  {item.tooltip}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Mini Laptop Navigation - Compact with shorter labels */}
-          <div className="hidden lg:flex xl:hidden items-center space-x-3">
-            {navigationItems.map((item) => (
-              <div key={item.id} className="tooltip-container">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center space-x-1.5 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                    activeSection === item.id
-                      ? 'text-kubernetes-600 dark:text-kubernetes-400 bg-kubernetes-50 dark:bg-kubernetes-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-kubernetes-600 dark:hover:text-kubernetes-400'
-                  }`}
-                >
-                  <FontAwesomeIcon icon={item.icon} className="w-3.5 h-3.5" />
-                  <span>{item.tooltip}</span>
-                </motion.button>
-                <div className="tooltip">
-                  {item.label}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Tablet Navigation - Compact icons only */}
-          <div className="hidden md:flex lg:hidden items-center space-x-4">
-            {navigationItems.map((item) => (
-              <div key={item.id} className="tooltip-container">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center justify-center w-10 h-10 rounded-md transition-colors ${
-                    activeSection === item.id
-                      ? 'text-kubernetes-600 dark:text-kubernetes-400 bg-kubernetes-50 dark:bg-kubernetes-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-kubernetes-600 dark:hover:text-kubernetes-400 hover:bg-gray-50 dark:hover:bg-gray-800'
-                  }`}
-                >
-                  <FontAwesomeIcon icon={item.icon} className="w-5 h-5" />
-                </motion.button>
-                <div className="tooltip">
-                  {item.tooltip}
-                </div>
-              </div>
+              <motion.button
+                key={item.id}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection(item.id)}
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  activeSection === item.id
+                    ? 'text-kubernetes-600 dark:text-kubernetes-400 bg-kubernetes-50 dark:bg-kubernetes-900/20'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-kubernetes-600 dark:hover:text-kubernetes-400'
+                }`}
+              >
+                <FontAwesomeIcon icon={item.icon} className="w-4 h-4" />
+                <span>{item.label}</span>
+              </motion.button>
             ))}
           </div>
 
@@ -218,26 +160,20 @@ export default function Navbar({ activeSection }: NavbarProps) {
           >
             <div className="flex flex-col space-y-2">
               {navigationItems.map((item) => (
-                <div key={item.id} className="relative">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`flex items-center space-x-3 px-4 py-3 rounded-md text-sm font-medium transition-colors w-full ${
-                      activeSection === item.id
-                        ? 'text-kubernetes-600 dark:text-kubernetes-400 bg-kubernetes-50 dark:bg-kubernetes-900/20'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-kubernetes-600 dark:hover:text-kubernetes-400 hover:bg-gray-50 dark:hover:bg-gray-800'
-                    }`}
-                  >
-                    <FontAwesomeIcon icon={item.icon} className="w-4 h-4" />
-                    <div className="flex flex-col items-start">
-                      <span>{item.label}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                        {item.tooltip}
-                      </span>
-                    </div>
-                  </motion.button>
-                </div>
+                <motion.button
+                  key={item.id}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-md text-sm font-medium transition-colors w-full ${
+                    activeSection === item.id
+                      ? 'text-kubernetes-600 dark:text-kubernetes-400 bg-kubernetes-50 dark:bg-kubernetes-900/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-kubernetes-600 dark:hover:text-kubernetes-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                  }`}
+                >
+                  <FontAwesomeIcon icon={item.icon} className="w-4 h-4" />
+                  <span>{item.label}</span>
+                </motion.button>
               ))}
             </div>
           </motion.div>

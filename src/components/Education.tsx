@@ -115,7 +115,7 @@ export default function Education() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
-            Deployment History
+            Education
           </h2>
             <p className="text-lg font-light text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             My Knowledge Base is compiled from two release cycles.

@@ -205,7 +205,7 @@ export default function Skills() {
           </div>
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
             <FontAwesomeIcon icon={faTools} className="inline-block mr-2 text-kubernetes-300" />
-            Service Mesh
+            Technical Skills
           </h2>
           <p className="text-lg font-light text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Code, container, deploy, repeat - powered by caffeine.

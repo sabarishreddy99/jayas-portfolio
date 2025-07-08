@@ -118,7 +118,7 @@ export default function Projects() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
-            Container Registry
+            Projects
           </h2>
           <p className="text-lg font-light text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             My personal container registry where each commit tells a story, every release solves a problem.

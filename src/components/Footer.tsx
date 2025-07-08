@@ -34,10 +34,10 @@ export default function Footer() {
     {
       title: 'Navigation',
       links: [
-        { name: 'Orchestration Hub', href: '#orchestration-hub' },
-        { name: 'Cluster Manifest', href: '#cluster-manifest' },
-        { name: 'Runtime Environments', href: '#runtime-environments' },
-        { name: 'Container Registry', href: '#container-registry' },
+        { name: 'Home', href: '#orchestration-hub' },
+        { name: 'About Me', href: '#cluster-manifest' },
+        { name: 'Work Experience', href: '#runtime-environments' },
+        { name: 'Projects', href: '#container-registry' },
       ]
     },
     {

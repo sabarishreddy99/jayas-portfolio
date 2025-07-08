@@ -534,7 +534,7 @@ export default function Contact() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
-            Network Policies
+            Contact Me
           </h2>
           <p className="text-lg font-light text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Let’s connect and deploy something great!
