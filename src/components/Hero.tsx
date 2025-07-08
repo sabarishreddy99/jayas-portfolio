@@ -120,13 +120,13 @@ export default function Hero() {
         {/* Status Cards */}
         <motion.div 
           variants={itemVariants} 
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2 max-w-4xl mx-auto"
+          className="status-cards-grid grid grid-cols-1 md:grid-cols-3 gap-6 mb-2 max-w-4xl mx-auto"
         >
           <motion.div
             whileHover={{ scale: 1.05, y: -5 }}
-            className="glass-effect rounded-lg p-6 kubernetes-glow"
+            className="status-card glass-effect rounded-lg p-6 kubernetes-glow"
           >
-            <FontAwesomeIcon icon={faBriefcase} className="w-8 h-8 text-kubernetes-500 mb-3" />
+            <FontAwesomeIcon icon={faBriefcase} className="status-icon w-8 h-8 text-kubernetes-500 mb-3" />
             <h3 className="font-semibold text-gray-800 dark:text-gray-200">SDE</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               NYU IT - HSRN
@@ -141,9 +141,9 @@ export default function Hero() {
 
           <motion.div
             whileHover={{ scale: 1.05, y: -5 }}
-            className="glass-effect rounded-lg p-6 docker-glow"
+            className="status-card glass-effect rounded-lg p-6 docker-glow"
           >
-            <FontAwesomeIcon icon={faGraduationCap} className="w-8 h-8 text-docker-500 mb-3" />
+            <FontAwesomeIcon icon={faGraduationCap} className="status-icon w-8 h-8 text-docker-500 mb-3" />
             <h3 className="font-semibold text-gray-800 dark:text-gray-200">Academia</h3>
              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               CS @ New York University
@@ -155,9 +155,9 @@ export default function Hero() {
 
           <motion.div
             whileHover={{ scale: 1.05, y: -5 }}
-            className="glass-effect rounded-lg p-6 kubernetes-glow"
+            className="status-card glass-effect rounded-lg p-6 kubernetes-glow"
           >
-             <FontAwesomeIcon icon={faCode} className="w-8 h-8 text-docker-500 mb-3" />
+             <FontAwesomeIcon icon={faCode} className="status-icon w-8 h-8 text-docker-500 mb-3" />
             <h3 className="font-semibold text-gray-800 dark:text-gray-200">Core Strengths</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
               Full-Stack Development | 

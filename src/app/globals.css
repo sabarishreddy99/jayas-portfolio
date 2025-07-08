@@ -1111,3 +1111,187 @@ span[role="img"],
     transition: all 0.3s ease;
   }
 }
+
+/* Hero Status Cards Juggling Animation */
+@keyframes statusCardFloat {
+  0%, 100% { 
+    transform: translateY(0px) scale(1) rotate(0deg);
+  }
+  25% { 
+    transform: translateY(-4px) scale(1.01) rotate(0.5deg);
+  }
+  50% { 
+    transform: translateY(2px) scale(1.02) rotate(0deg);
+  }
+  75% { 
+    transform: translateY(-1px) scale(1.01) rotate(-0.3deg);
+  }
+}
+
+@keyframes statusCardJuggle {
+  0%, 100% { 
+    transform: translateY(0px) scale(1) rotate(0deg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  20% { 
+    transform: translateY(-6px) scale(1.02) rotate(1deg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+  40% { 
+    transform: translateY(3px) scale(0.98) rotate(-0.8deg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  60% { 
+    transform: translateY(-3px) scale(1.04) rotate(0.6deg);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+  80% { 
+    transform: translateY(1px) scale(1.01) rotate(-0.4deg);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes statusIconSpin {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+  }
+  25% { 
+    transform: scale(1.1) rotate(5deg);
+  }
+  50% { 
+    transform: scale(1.05) rotate(0deg);
+  }
+  75% { 
+    transform: scale(1.08) rotate(-3deg);
+  }
+}
+
+@keyframes statusGlow {
+  0%, 100% { 
+    filter: brightness(1);
+  }
+  50% { 
+    filter: brightness(1.08);
+  }
+}
+
+/* Status card base styles */
+.status-card {
+  animation: statusCardFloat 5s ease-in-out infinite;
+  transform-origin: center;
+  transition: all 0.3s ease;
+  will-change: transform;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Individual status card juggling with staggered delays */
+.status-card:nth-child(1) { 
+  animation: statusCardJuggle 4.5s ease-in-out infinite;
+  animation-delay: 0s; 
+}
+.status-card:nth-child(2) { 
+  animation: statusCardJuggle 5.2s ease-in-out infinite;
+  animation-delay: 0.8s; 
+}
+.status-card:nth-child(3) { 
+  animation: statusCardJuggle 4.8s ease-in-out infinite;
+  animation-delay: 1.6s; 
+}
+
+/* Status card icons */
+.status-icon {
+  animation: statusIconSpin 6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.status-icon:nth-child(1) { animation-delay: 0.2s; }
+.status-icon:nth-child(2) { animation-delay: 1s; }
+.status-icon:nth-child(3) { animation-delay: 1.8s; }
+
+/* Enhanced hover effects */
+.status-card:hover {
+  animation-play-state: paused;
+  transform: scale(1.08) translateY(-8px) rotate(2deg) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 25px rgba(99, 102, 241, 0.3) !important;
+  z-index: 10;
+}
+
+/* Kubernetes-themed glow */
+.status-card.kubernetes-glow:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 25px rgba(99, 102, 241, 0.4) !important;
+}
+
+/* Docker-themed glow */
+.status-card.docker-glow:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 25px rgba(96, 165, 250, 0.4) !important;
+}
+
+/* Shimmer effect for status cards */
+.status-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.6s ease;
+  border-radius: 0.5rem;
+}
+
+.status-card:hover::before {
+  left: 100%;
+}
+
+/* Status cards grid enhancements */
+.status-cards-grid {
+  perspective: 1000px;
+}
+
+/* Pause all animations on grid hover for better UX */
+.status-cards-grid:hover .status-card {
+  animation-play-state: paused;
+}
+
+/* Resume animation on individual hover */
+.status-cards-grid:hover .status-card:hover {
+  animation-play-state: running;
+}
+
+/* Dark mode adjustments */
+.dark .status-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(147, 197, 253, 0.4) !important;
+}
+
+.dark .status-card.kubernetes-glow:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(147, 197, 253, 0.4) !important;
+}
+
+.dark .status-card.docker-glow:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(147, 197, 253, 0.4) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .status-card {
+    animation-duration: 6s;
+  }
+  
+  .status-card:hover {
+    transform: scale(1.05) translateY(-5px) rotate(1deg) !important;
+  }
+}
+
+/* Accessibility: Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .status-card,
+  .status-icon {
+    animation: none;
+  }
+  
+  .status-card:hover {
+    transform: scale(1.03) !important;
+    transition: all 0.3s ease;
+  }
+}
