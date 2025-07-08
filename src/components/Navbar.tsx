@@ -108,8 +108,8 @@ export default function Navbar({ activeSection }: NavbarProps) {
             </span>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - Only show on larger screens */}
+          <div className="hidden xl:flex items-center space-x-6">
             {navigationItems.map((item) => (
               <div key={item.id} className="tooltip-container">
                 <motion.button
@@ -132,6 +132,53 @@ export default function Navbar({ activeSection }: NavbarProps) {
             ))}
           </div>
 
+          {/* Mini Laptop Navigation - Compact with shorter labels */}
+          <div className="hidden lg:flex xl:hidden items-center space-x-3">
+            {navigationItems.map((item) => (
+              <div key={item.id} className="tooltip-container">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`flex items-center space-x-1.5 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                    activeSection === item.id
+                      ? 'text-kubernetes-600 dark:text-kubernetes-400 bg-kubernetes-50 dark:bg-kubernetes-900/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-kubernetes-600 dark:hover:text-kubernetes-400'
+                  }`}
+                >
+                  <FontAwesomeIcon icon={item.icon} className="w-3.5 h-3.5" />
+                  <span>{item.tooltip}</span>
+                </motion.button>
+                <div className="tooltip">
+                  {item.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Tablet Navigation - Compact icons only */}
+          <div className="hidden md:flex lg:hidden items-center space-x-4">
+            {navigationItems.map((item) => (
+              <div key={item.id} className="tooltip-container">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`flex items-center justify-center w-10 h-10 rounded-md transition-colors ${
+                    activeSection === item.id
+                      ? 'text-kubernetes-600 dark:text-kubernetes-400 bg-kubernetes-50 dark:bg-kubernetes-900/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-kubernetes-600 dark:hover:text-kubernetes-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                  }`}
+                >
+                  <FontAwesomeIcon icon={item.icon} className="w-5 h-5" />
+                </motion.button>
+                <div className="tooltip">
+                  {item.tooltip}
+                </div>
+              </div>
+            ))}
+          </div>
+
           {/* Theme Toggle and Mobile Menu */}
           <div className="flex items-center space-x-4">
             <motion.button
@@ -146,7 +193,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
               />
             </motion.button>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Show on mobile only */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
