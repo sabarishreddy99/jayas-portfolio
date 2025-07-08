@@ -14,9 +14,92 @@ import {
   faExternalLinkAlt,
   faDownload,
   faChevronUp,
-  faFileText
+  faFileText,
+  faCheck,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
+
+// Success/Error Popup Component
+function FormPopup({ isVisible, type, message, onClose }: {
+  isVisible: boolean;
+  type: 'success' | 'error';
+  message: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 5000); // Auto close after 5 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, onClose]);
+
+  if (!isVisible) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8, y: -50 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.8, y: -50 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    >
+      {/* Backdrop */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      {/* Popup Content */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        className="relative z-10 max-w-md w-full"
+      >
+        <div className={`
+          p-6 rounded-xl shadow-2xl border-l-4 backdrop-blur-sm
+          ${type === 'success' 
+            ? 'bg-white/95 dark:bg-gray-800/95 border-green-500 text-green-800 dark:text-green-200' 
+            : 'bg-white/95 dark:bg-gray-800/95 border-red-500 text-red-800 dark:text-red-200'
+          }
+        `}>
+          <div className="flex items-start">
+            <div className="flex-shrink-0">
+              <div className={`
+                w-10 h-10 rounded-full flex items-center justify-center
+                ${type === 'success' ? 'bg-green-100 dark:bg-green-900/30' : 'bg-red-100 dark:bg-red-900/30'}
+              `}>
+                <FontAwesomeIcon 
+                  icon={type === 'success' ? faCheck : faTimes} 
+                  className={`w-5 h-5 ${type === 'success' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
+                />
+              </div>
+            </div>
+            <div className="ml-4 flex-1">
+              <h3 className="text-lg font-semibold mb-2">
+                {type === 'success' ? 'Message Sent Successfully!' : 'Submission Failed'}
+              </h3>
+              <p className="text-sm opacity-90 leading-relaxed">
+                {message}
+              </p>
+            </div>
+            <button
+              onClick={onClose}
+              className="ml-4 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+            >
+              <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 // Floating Mobile Buttons Component
 function FloatingMobileButtons() {
@@ -274,6 +357,78 @@ export default function Contact() {
     triggerOnce: true,
   })
 
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [popup, setPopup] = useState({
+    isVisible: false,
+    type: 'success' as 'success' | 'error',
+    message: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // Google Form submission URL (replace with your actual form URL)
+      const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSdMQ0D6SV-Z1lRkqneFTD8Zfryxpc6mwNjr5tscxmkbsSg93g/formResponse';
+
+      // Create form data for Google Forms
+      const submitData = new FormData();
+      submitData.append('entry.947625533', formData.name); // Replace with actual entry IDs
+      submitData.append('entry.1275510566', formData.email);
+      submitData.append('entry.4476105', formData.message);
+
+      // Submit to Google Forms
+      await fetch(googleFormURL, {
+        method: 'POST',
+        body: submitData,
+        mode: 'no-cors' // Required for Google Forms
+      });
+
+      // Show success popup
+      setPopup({
+        isVisible: true,
+        type: 'success',
+        message: 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!'
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setPopup({
+        isVisible: true,
+        type: 'error',
+        message: 'Sorry, there was an error sending your message. Please try again or email me directly.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const closePopup = () => {
+    setPopup(prev => ({ ...prev, isVisible: false }));
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -355,6 +510,14 @@ export default function Contact() {
 
   return (
     <>
+      {/* Form Popup */}
+      <FormPopup 
+        isVisible={popup.isVisible}
+        type={popup.type}
+        message={popup.message}
+        onClose={closePopup}
+      />
+      
       <section ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
         <motion.div
           variants={containerVariants}
@@ -454,28 +617,29 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Call to Action */}
+          {/* Right Column Content */}
           <motion.div variants={itemVariants} className="space-y-8">
+
             {/* Resume Download */}
-            <div className="glass-effect rounded-lg p-8 kubernetes-glow">
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6 flex items-center">
-                <FontAwesomeIcon icon={faDownload} className="w-6 h-6 mr-3 text-kubernetes-500" />
-                Resource Manifest
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Download my complete technical specifications and deployment history for detailed review.
+            <div className="glass-effect rounded-lg p-6 docker-glow">
+              <h4 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center">
+                <FontAwesomeIcon icon={faDownload} className="w-5 h-5 mr-2 text-docker-500" />
+                Download Resume
+              </h4>
+              <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                Get my complete technical specifications and deployment history.
               </p>
               <motion.a
                 href="https://drive.google.com/drive/folders/1vm35z-6VQjtO9A8ZBgCvvSP_7_POPTrV?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full bg-kubernetes-600 hover:bg-kubernetes-700 text-white py-4 px-6 rounded-lg font-medium transition-colors flex items-center justify-center space-x-3"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-docker-600 hover:bg-docker-700 text-white py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 text-sm"
               >
-                <FontAwesomeIcon icon={faDownload} className="w-5 h-5" />
-                <span>Download Resume (PDF)</span>
-                <FontAwesomeIcon icon={faExternalLinkAlt} className="w-4 h-4" />
+                <FontAwesomeIcon icon={faDownload} className="w-4 h-4" />
+                <span>Download PDF</span>
+                <FontAwesomeIcon icon={faExternalLinkAlt} className="w-3 h-3" />
               </motion.a>
             </div>
 
@@ -550,7 +714,7 @@ export default function Contact() {
                 className="group inline-flex items-center justify-center space-x-3 bg-white dark:bg-gray-800 border-2 border-kubernetes-600 text-kubernetes-600 hover:bg-kubernetes-600 hover:text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 shadow-sm hover:shadow-lg min-w-[200px]"
               >
                 <FontAwesomeIcon icon={faEnvelope} className="w-5 h-5 transition-transform group-hover:scale-110" />
-                <span>Send Message</span>
+                <span>Email</span>
                 <motion.div
                   className="w-2 h-2 bg-current rounded-full opacity-0 group-hover:opacity-100"
                   animate={{ scale: [1, 1.2, 1] }}
@@ -569,6 +733,113 @@ export default function Contact() {
                 <span>View Profile</span>
                 <FontAwesomeIcon icon={faExternalLinkAlt} className="w-3 h-3 opacity-60 group-hover:opacity-100 transition-opacity" />
               </motion.a>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Get in Touch Form Section */}
+        <motion.div variants={itemVariants} className="mt-16">
+          <div className="max-w-2xl mx-auto">
+            <div className="glass-effect rounded-lg p-8 kubernetes-glow">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6 flex items-center justify-center">
+                <FontAwesomeIcon icon={faPaperPlane} className="w-6 h-6 mr-3 text-kubernetes-500" />
+                Get in Touch
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-8 text-center">
+                Send me a message and I'll get back to you as soon as possible.
+              </p>
+              
+              <form className="contact-form space-y-6" onSubmit={handleSubmit}>
+                {/* Name and Email Row - Desktop */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Name Field */}
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Full Name *
+                    </label>
+                    <motion.input
+                      whileFocus={{ scale: 1.01 }}
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500/30 focus:border-blue-400 dark:focus:border-blue-400 valid:ring-green-300 dark:valid:ring-green-500/30 valid:border-green-400 dark:valid:border-green-400 transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+
+                  {/* Email Field */}
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Email Address *
+                    </label>
+                    <motion.input
+                      whileFocus={{ scale: 1.01 }}
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500/30 focus:border-blue-400 dark:focus:border-blue-400 valid:ring-green-300 dark:valid:ring-green-500/30 valid:border-green-400 dark:valid:border-green-400 transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                      placeholder="Enter your email address"
+                    />
+                  </div>
+                </div>
+
+                {/* Message Field */}
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Message *
+                  </label>
+                  <motion.textarea
+                    whileFocus={{ scale: 1.01 }}
+                    id="message"
+                    name="message"
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500/30 focus:border-blue-400 dark:focus:border-blue-400 valid:ring-green-300 dark:valid:ring-green-500/30 valid:border-green-400 dark:valid:border-green-400 transition-all duration-200 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 resize-vertical min-h-[120px] disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder="Tell me about your project, opportunity, or just say hello..."
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
+                  whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                  className="w-full bg-kubernetes-600 hover:bg-kubernetes-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl disabled:shadow-none"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                      />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon={faPaperPlane} className="w-4 h-4" />
+                      <span>Send Message</span>
+                    </>
+                  )}
+                </motion.button>
+
+                {/* Form Note */}
+                <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                  Your message will be sent directly to my inbox. I typically respond within 24 hours.
+                </p>
+              </form>
             </div>
           </div>
         </motion.div>

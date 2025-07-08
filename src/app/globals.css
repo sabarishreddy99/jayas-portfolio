@@ -1390,3 +1390,34 @@ span[role="img"],
 .dark .jaya-logo:hover {
   filter: drop-shadow(0 8px 16px rgba(99, 102, 241, 0.5)) !important;
 }
+
+/* Contact Form Styles */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  transform: scale(1.01);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.contact-form input,
+.contact-form textarea {
+  transition: all 0.2s ease-in-out;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Form validation styles - only green for valid, no red for invalid */
+.contact-form input:valid,
+.contact-form textarea:valid {
+  border-color: rgb(34, 197, 94);
+}
+
+/* Responsive form adjustments */
+@media (max-width: 768px) {
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
