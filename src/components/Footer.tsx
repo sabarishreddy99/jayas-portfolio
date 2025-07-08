@@ -1,11 +1,29 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDocker, faCodepen, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faHeart, faCode, faRocket, faEnvelope, faArrowUp, faTerminal, faHome } from '@fortawesome/free-solid-svg-icons'
 
 export default function Footer() {
+  const [isAtBottom, setIsAtBottom] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      
+      // Check if user is near the bottom (within 200px of end)
+      const isNearBottom = scrollY + windowHeight >= documentHeight - 200
+      setIsAtBottom(isNearBottom)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -166,7 +184,11 @@ export default function Footer() {
       {/* Floating Status Indicator - Hidden on Mobile */}
       <motion.div
         initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
+        animate={{ 
+          scale: isAtBottom ? 0 : 1,
+          opacity: isAtBottom ? 0 : 1
+        }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
         className="fixed bottom-6 left-6 z-40 hidden md:block"
       >
         <div className="flex items-center space-x-2 bg-green-600 text-white px-3 py-2 rounded-full text-xs font-medium shadow-lg">
