@@ -99,7 +99,7 @@ export default function Education() {
   }
 
   return (
-    <section ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+    <section ref={ref} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
       <motion.div
         variants={containerVariants}
         initial="hidden"

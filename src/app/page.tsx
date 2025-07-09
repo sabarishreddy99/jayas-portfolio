@@ -92,11 +92,11 @@ export default function Home() {
           <section id="runtime-environments">
             <Experience />
           </section>
-          <section id="deployment-history">
-            <Education />
-          </section>
           <section id="container-registry">
             <Projects />
+          </section>
+          <section id="deployment-history">
+            <Education />
           </section>
           <section id="service-mesh">
             <Skills />

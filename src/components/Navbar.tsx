@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSun, faMoon, faBars, faTimes, faBarcode, faHotdog, faSuitcase, faGraduationCap, faToolbox, faTools, faMicrophone, faCoffee, faCodeFork, faCode, faCodeMerge, faCodeBranch } from '@fortawesome/free-solid-svg-icons'
+import { faSun, faMoon, faBars, faTimes, faBarcode, faHotdog, faSuitcase, faGraduationCap, faToolbox, faTools, faMicrophone, faCoffee, faCodeFork, faCode, faCodeMerge, faCodeBranch, faMountainSun } from '@fortawesome/free-solid-svg-icons'
 import { faDocker, faCodepen, faStackOverflow, faCodiepie } from '@fortawesome/free-brands-svg-icons'
 
 interface NavbarProps {
@@ -37,14 +37,14 @@ export default function Navbar({ activeSection }: NavbarProps) {
       icon: faSuitcase
     },
     { 
-      id: 'deployment-history', 
-      label: 'Education', 
-      icon: faGraduationCap
-    },
-    { 
       id: 'container-registry', 
       label: 'Projects', 
       icon: faStackOverflow
+    },
+    { 
+      id: 'deployment-history', 
+      label: 'Education', 
+      icon: faGraduationCap
     },
     { 
       id: 'service-mesh', 
@@ -130,7 +130,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
               className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               <FontAwesomeIcon 
-                icon={theme === 'dark' ? faSun : faMoon} 
+                icon={theme === 'dark' ? faMountainSun : faMoon} 
                 className="w-5 h-5" 
               />
             </motion.button>
