@@ -272,11 +272,19 @@ function FloatingContactIcons() {
       color: 'bg-blue-600 hover:bg-blue-700',
       delay: 0.1,
       external: true
+    },
+    {
+      icon: faDownload,
+      href: 'https://drive.google.com/drive/folders/1vm35z-6VQjtO9A8ZBgCvvSP_7_POPTrV?usp=sharing',
+      label: 'Download Resume',
+      color: 'bg-docker-600 hover:bg-docker-700',
+      delay: 0.2,
+      external: true
     }
   ]
 
   return (
-    <div className="hidden md:block">
+    <div className="hidden sm:block">
       <motion.div
         initial={{ opacity: 0, x: 100 }}
         animate={{ 
