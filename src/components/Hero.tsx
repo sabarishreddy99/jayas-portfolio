@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDocker, faCodepen, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
@@ -10,7 +10,25 @@ import { getImagePath } from '@/utils/images'
 
 export default function Hero() {
   const [copied, setCopied] = useState(false)
+  const [displayedText, setDisplayedText] = useState('')
+  const [isTypingComplete, setIsTypingComplete] = useState(false)
   const email = "jr6421@nyu.edu"
+  const taglineText = "Simplifying complexity with Docker builds and Kubernetes brains."
+
+  useEffect(() => {
+    let index = 0
+    const timer = setInterval(() => {
+      if (index < taglineText.length) {
+        setDisplayedText(taglineText.slice(0, index + 1))
+        index++
+      } else {
+        setIsTypingComplete(true)
+        clearInterval(timer)
+      }
+    }, 100) // Slower, more professional timing
+
+    return () => clearInterval(timer)
+  }, [])
 
   const copyEmail = async () => {
     try {
@@ -113,8 +131,132 @@ export default function Hero() {
           </h1>
          
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-700 dark:text-gray-300 mb-6 tracking-wide leading-relaxed">
-           Simplifying complexity with Docker builds and Kubernetes brains.
+            {displayedText}
+            {!isTypingComplete && (
+              <span className="inline-block w-0.5 h-7 md:h-9 lg:h-11 bg-gradient-to-b from-kubernetes-500 to-kubernetes-600 ml-1 rounded-sm shadow-sm animate-blink opacity-80">
+              </span>
+            )}
           </h2>
+          
+          {/* Professional Summary */}
+          <div className="max-w-6xl mx-auto mb-8">
+            <motion.div
+              variants={itemVariants}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0, 
+                scale: 1,
+                transition: {
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1], // Professional easing curve
+                  staggerChildren: 0.15
+                }
+              }}
+              viewport={{ once: true, margin: "-100px" }}
+              whileHover={{ 
+                y: -8,
+                scale: 1.02,
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}
+              className="relative rounded-2xl p-8 md:p-10 lg:p-12 bg-gradient-to-br from-gray-900/95 via-gray-800/90 to-gray-900/95 dark:from-gray-900/98 dark:via-gray-800/95 dark:to-gray-900/98 backdrop-blur-lg border border-gray-700/60 dark:border-gray-600/60 shadow-2xl shadow-black/30 dark:shadow-black/50 hover:shadow-3xl hover:shadow-black/40 dark:hover:shadow-black/60 transition-shadow duration-500"
+            >
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-br from-kubernetes-500/8 to-docker-500/8 rounded-2xl"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.3 }}
+              />
+              <div className="relative">
+                <motion.div 
+                  className="flex items-center justify-center mb-6"
+                  initial={{ opacity: 0, scaleX: 0 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    scaleX: 1,
+                    transition: { duration: 0.8, delay: 0.4, ease: "easeOut" }
+                  }}
+                >
+                  <div className="w-16 h-1 bg-gradient-to-r from-kubernetes-500 to-docker-500 rounded-full"></div>
+                </motion.div>
+                <motion.p 
+                  className="text-md md:text-lg lg:text-lg leading-relaxed text-gray-100 dark:text-gray-100 font-light text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { 
+                      duration: 0.8, 
+                      delay: 0.6, 
+                      ease: [0.22, 1, 0.36, 1] 
+                    }
+                  }}
+                >
+                  <motion.span 
+                    className="text-kubernetes-400 dark:text-kubernetes-400 font-light"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                  >
+                    Software Engineer
+                  </motion.span> with <motion.span 
+                    className="text-docker-400 dark:text-docker-400 font-light"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.9 }}
+                  >
+                    3+ years
+                  </motion.span> of experience delivering scalable web applications, cloud-native platforms, and CI/CD automation across enterprise and academic environments. Led full-stack product development at <motion.span 
+                    className="text-kubernetes-400 dark:text-kubernetes-400 font-light"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 1.0 }}
+                  >
+                    NYU IT, Shell, and Wipro
+                  </motion.span>, boosting platform engagement by <motion.span 
+                    className="text-emerald-400 dark:text-emerald-400 font-light"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 1.1, type: "spring", stiffness: 200 }}
+                  >
+                    73%
+                  </motion.span>, reducing deployment failures by <motion.span 
+                    className="text-emerald-400 dark:text-emerald-400 font-light"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 1.2, type: "spring", stiffness: 200 }}
+                  >
+                    80%
+                  </motion.span>, and serving <motion.span 
+                    className="text-blue-400 dark:text-blue-400 font-light"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 1.3, type: "spring", stiffness: 200 }}
+                  >
+                    10K+ users
+                  </motion.span> with zero downtime. Adept in <motion.span 
+                    className="text-gray-200 dark:text-gray-200 font-light"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 1.4 }}
+                  >
+                    React, Node.js, Python, Java, Kubernetes, Terraform, and AWS
+                  </motion.span> ready to accelerate impact across development, DevOps, and infrastructure in fast-paced engineering teams.
+                </motion.p>
+                <motion.div 
+                  className="flex items-center justify-center mt-6"
+                  initial={{ opacity: 0, scaleX: 0 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    scaleX: 1,
+                    transition: { duration: 0.8, delay: 1.6, ease: "easeOut" }
+                  }}
+                >
+                  <div className="w-16 h-1 bg-gradient-to-r from-docker-500 to-kubernetes-500 rounded-full"></div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* Status Cards */}
